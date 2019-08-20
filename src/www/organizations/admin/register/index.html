@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Foodable</title>
+
+		<link rel="icon" type="image/x-icon" href="../../../web/assets/imgs/icon/favicon.ico">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">		
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+		<script src="index.js"></script>
+	</head>
+	<body>
+		<div style="width: 20%; height: 50%; position: absolute; left: 40%; margin-top: 20px;">
+			<h2 style="text-align: center;">Organization Registration</h2>
+			<div>
+				<div class="form-group">		
+					<label for="username">Username</label>
+					<input type="username" class="form-control" id="username" placeholder="myorganization">	
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" class="form-control" id="password" placeholder="password">
+				</div>
+				<div class="form-group">
+					<label for="confirmPassword">Confirm Password</label>
+					<input type="password" class="form-control" id="confirmPassword" placeholder="confirm password">
+				</div>
+				<div class="form-group">		
+					<label for="orgName">Organization Name</label>
+					<input type="text" class="form-control" id="orgName" placeholder="My Organization">	
+				</div>
+				<div class="form-group">		
+					<label for="email">Contact Email</label>
+					<input type="email" class="form-control" id="email" placeholder="the email you want us to contact you with">	
+				</div>
+				<div class="form-group">
+					<label for="orgUrl">Organization Website</label>
+					<input type="text" class="form-control" id="orgUrl" placeholder="https://myorganization.com">
+				</div>
+				<div class="form-group">
+					<label for="about">About Organization</label>
+					<textarea type="text" rows="8" class="form-control" id="about" placeholder="write some info about your organization and what you do here..."></textarea>
+				</div>
+				<button class="btn btn-primary" onclick="onRegister()" style="float: right;">Register</button>	
+			</div>
+		</div>
+		<footer class="footer" style="position: absolute; bottom: 0; width: 100%; height: 50px; background: rgb(225, 225, 225);">
+			<span class="text-muted" style="float: left; padding: 10px; padding-left: 50px;"><a href="/">Homepage</a></span>				
+			<span class="text-muted" style="float: right; padding: 10px; padding-right: 50px;">Copyright 2018 © <a target="_blank" href="https://github.com/LucasBaizer">Lucas Baizer</a></span>
+		</footer>
+	</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Foodable</title>
+	
+		<link rel="icon" type="image/x-icon" href="../../../web/assets/imgs/icon/favicon.ico">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+		<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>		
+		<script src="index.js"></script>
+	</head>
+	<body>
+		<div class="modal fade" tabindex="-1" role="dialog" id="AddModal" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+			  	<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Add Location</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="LocationName">Location Name</label>
+							<input type="text" class="form-control" id="LocationName" placeholder="My Food Bank">
+						</div>
+						<div class="form-group">
+							<label for="LocationStreet">Street</label>
+							<input type="text" class="form-control" id="LocationStreet" placeholder="123 Baker St">
+						</div>
+						<div class="form-group">
+							<label for="LocationCity">City</label>
+							<input type="text" class="form-control" id="LocationCity" placeholder="San Diego">
+						</div>
+						<div class="form-group">
+							<label for="LocationZip">Zip Code</label>
+							<input type="text" class="form-control" id="LocationZip" placeholder="12345">
+						</div>
+						<div class="form-group">
+							<label for="LocationUrl">Location Website</label>
+							<input type="text" class="form-control" id="LocationUrl" placeholder="https://myfoodbank.com">
+						</div>
+						<div class="form-group">
+							<label for="LocationFoods">Available Foods</label>
+							<input type="text" class="form-control" id="LocationFoods" placeholder="canned beans and corn">
+						</div>
+						<div class="form-group">
+							<label for="LocationHours">Hours of Operation</label>
+							<input type="text" class="form-control" id="LocationHours" placeholder="9AM-5PM on weekdays">
+						</div>
+						<div class="form-group">
+							<label for="LocationPhone">Phone Number</label>
+							<input type="text" class="form-control" id="LocationPhone" placeholder="(123) 867-5309">
+						</div>
+						<div class="form-group">
+							<label for="LocationClosures">Closures</label>
+							<input type="text" class="form-control" id="LocationClosures" placeholder="all national holidays">
+						</div>
+						<div class="form-group">
+							<label for="LocationEligibility">Eligibility</label>
+							<input type="text" class="form-control" id="LocationEligibility" placeholder="none / must meet Food Program Income Guidelines">
+						</div>
+						<div class="form-group">
+							<label for="LocationEligibilityUrl">Eligibility Document URL</label>
+							<input type="text" class="form-control" id="LocationEligibilityUrl" placeholder="none / https://myfoodbank.com/EligibilityRequirements.pdf">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" onclick="clearAdd();" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary" onclick="submitLocation();">Add</button>						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" tabindex="-1" role="dialog" id="ImportCSV" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+			  	<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Import Location CSV</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form id="CSVForm">
+							<p>
+								Your CSV needs to be in a specific format to be imported into Foodable. The columns should be in the format (in any order):<br /><br />
+								<b>name</b> the name of the distributor<br />
+								<b>street</b> the street the distributor is on<br />
+								<b>city</b> the city the distributor is in<br />
+								<b>zip</b> the 5-digit zip code the distributor is in<br />
+								<b>url</b> the link to the distributor's website<br />
+								<b>foods</b> the foods available at the distributor<br />
+								<b>hours</b> the hours and days the distributor is open<br />
+								<b>phoneNumber</b> the phone number of the distributor<br />
+								<b>closures</b> expected days that the distributor will be closed<br />
+								<b>eligibility</b> requirements to get food at the distributor (can be "none" or empty)<br />
+								<b>eligibilityUrl</b> link to the requirements document (can be "none" or empty)<br />
+							</p>
+							<input name="csv" type="file" accept=".csv">
+							<button style="float: right;" class="btn btn-success" onclick="importCSV(event);">Import</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+			<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="/" style="font-weight: bold;">Foodable</a>
+					</li>
+				</ul>
+			</div>
+			<div class="mx-auto order-0"></div>
+			<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a href="./logout"><button class="btn btn-primary my-2 my-sm-0">Logout</button></a>
+					</li>
+				</ul>
+			</form>
+		</nav>
+
+		<div class="container" style="max-width: none;">
+			<div class="row">
+				<div class="col-sm-2">
+					<h1 class="display-4" id="OrganizationName"></h1>
+					<hr class="my-4">
+					<p>
+						<img src="https://png.icons8.com/color/96/000000/pencil-tip.png" width="24px" height="24px" style="cursor: pointer;" onclick="edit('website');">
+						Organization Website:<br />
+						<a id="OrganizationURL" href="https://foodable.app" target="_blank">https://foodable.app</a>
+					</p>
+					<div>
+						<img src="https://png.icons8.com/color/96/000000/pencil-tip.png" width="24px" height="24px" style="cursor: pointer;" onclick="edit('image');">
+						Organization Image:<br />
+						<img src="https://foodable.app/web/assets/imgs/logo.png" width="256px" id="OrganizationImage">
+					</div>
+				</div>
+				<div class="col-sm-10" style="height: 80%; overflow-x: none; overflow-y: scroll; padding: 30px;">
+					<div style="text-align: center; padding-bottom: 20px;">
+						<button class="btn btn-success" onclick="addLocation();">Add Location</button>							
+						<button class="btn btn-success" onclick="openCSV();">Import Location CSV</button>
+					</div>
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<strong>Tip:</strong> Right-click on any row to edit or delete it.
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<table class="table table-bordered">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">Location Name</th>
+								<th scope="col">Location Address</th>
+								<th scope="col">Phone Number</th>
+								<th scope="col">Available Foods</th>
+								<th scope="col">Hours of Operation</th>
+								<th scope="col">Eligibility</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>	
+			</div>
+		</div>
+		<ul id="contextMenu" class="list-group" role="menu" style="display: none;" >
+			<li class="list-group-item list-group-item-action">Edit</li>
+			<li class="list-group-item list-group-item-action">Delete</li>
+		</ul>
+	</body>
+</html>
